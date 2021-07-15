@@ -1,0 +1,58 @@
+<div class="bg-success text-white d-flex flex-column position-sticky top-0" style="z-index: 2;">
+  <div class="position-relative d-flex">
+    <mat-toolbar class="bg-success text-white d-flex justify-content-center">
+      <span>Cursos</span>
+    </mat-toolbar>
+    <a mat-raised-button class="position-absolute bottom-0 end-0" style="background-color: orange;" href="http://localhost:4200">Soy instructor</a>
+  </div>
+
+  <p class="mx-auto" style="max-width: 50rem;">
+    Entrenamiento intensivo de varios deportes básicos como futbol, basquet, running.
+    No te vas a arrepentir, con instructores graduados de escuelas de deportes importantes
+    del país. Niños, adolescentes, adultos pueden hacer estos cursos.
+  </p>
+</div>
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://i.ibb.co/72Nxn0v/running.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://i.ibb.co/qDmVZR4/sports.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://i.ibb.co/d0YGKjD/natacion.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="card mx-auto mt-2" style="width: 90%;">
+  <div class="card-body">
+    <div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 g-4">
+      <div class="col" *ngFor="let curso of cursos">
+        <mat-card type="button" class="h-100 d-flex flex-column elevacion" routerLink="/detalles" (click)="getId(curso.id_cursos)">
+          <mat-card-header>
+            <mat-card-title>{{curso.nombre | titlecase}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image src="{{curso.url_imagen_presentacion}}" alt="Curso">
+          <mat-card-content>
+            <p>{{curso.descripcion}}</p>
+          </mat-card-content>
+          <strong>${{curso.precio_inscripcion}}</strong>
+          <mat-card-footer class="mt-auto d-flex">
+            <mat-divider></mat-divider>
+            <div mat-card-avatar class="ms-2 my-2" style="background-image: url({{curso.instructor.foto_perfil}}); background-size: cover;"></div>
+            <small class="ms-2 mt-3">{{curso.instructor.nombres}} {{curso.instructor.apellidos}}</small>
+          </mat-card-footer>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

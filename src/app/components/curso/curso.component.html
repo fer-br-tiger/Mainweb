@@ -1,0 +1,43 @@
+<div class="bg-success text-white d-flex flex-column position-sticky top-0" style="z-index: 1;">
+    <div class="position-relative d-flex">
+        <mat-toolbar class="bg-success text-white d-flex justify-content-center">
+            <span>Detalles del curso</span>
+        </mat-toolbar>
+        <a mat-raised-button class="position-absolute bottom-0 end-0" style="background-color: orange;" href="http://localhost:4200">Soy instructor</a>
+    </div>
+    
+    <p class="mx-auto" style="max-width: 50rem;">
+        Entrenamiento intensivo de varios deportes básicos como futbol, basquet, running.
+        No te vas a arrepentir, con instructores graduados de escuelas de deportes importantes
+        del país. Niños, adolescentes, adultos pueden hacer estos cursos.
+    </p>
+</div>
+<div class="container mt-2">
+    <h1>{{curso.nombre | titlecase}}</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <img src="{{curso.url_imagen_presentacion}}" width="100%" alt="Curso">
+            <h2 class="mt-2">Descripción</h2>
+            <mat-divider class="mb-2"></mat-divider>
+            <p>{{curso.descripcion}}</p>
+            <h2>Requisitos</h2>
+            <mat-divider class="mb-2"></mat-divider>
+            <p>{{curso.requisitos}}</p>
+            <h2>¿A quién va dirigido?</h2>
+            <mat-divider class="mb-2"></mat-divider>
+            <p>{{curso.publico_destinado}}</p>
+        </div>
+        <div class="col-md-4 d-flex flex-column">
+            <span class="mb-2 p-2 d-flex justify-content-between" style="background-color: lightgray;"><div>Instructor</div> {{curso.instructor.nombres}} {{curso.instructor.apellidos}}</span>
+            <span class="mb-2 p-2 d-flex justify-content-between" style="background-color: lightgray;">Precio inscripción <b>${{curso.precio_inscripcion}}</b></span>
+            <span class="mb-2 p-2 d-flex justify-content-between" style="background-color: lightgray;">Cuota <b>${{curso.precio_cuota}}</b></span>
+            <span class="mb-2 p-2 d-flex" style="background-color: lightgray;">
+                Horarios:
+                <ul>
+                    <li  *ngFor="let com of curso.comisiones"><b>{{com.nombre}}:</b> {{com.horario_dias}}</li>
+                </ul>
+            </span>
+            <button mat-raised-button class="me-auto rounded-pill text-white" style="background-color: yellowgreen;" (click)="openDialog()">Inscribirme</button>
+        </div>
+    </div>
+</div>

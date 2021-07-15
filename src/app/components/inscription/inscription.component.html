@@ -1,0 +1,137 @@
+<div class="d-flex justify-content-between">
+    <h2 mat-dialog-title>Inscripción</h2>
+    <button mat-icon-button matTooltip="Cerrar" mat-dialog-close>
+        <mat-icon style="color: red;">cancel</mat-icon>
+    </button>
+</div>
+<mat-dialog-content class="mat-typography">
+    <mat-horizontal-stepper linear>
+        <mat-step [stepControl]="comForm">
+            <form>
+                
+                <ng-template matStepLabel>Elija Comisión</ng-template>
+                <div class="d-flex align-items-center flex-column">
+                    <h3>{{curso.nombre}}</h3>
+                    <mat-radio-group [formControl]="comForm" aria-required="true">
+                        <mat-radio-button *ngFor="let com of curso.comisiones" [value]="com.nombre + ': ' + com.horario_dias">
+                            <mat-card class="p-4 mb-3">{{com.horario_dias}}</mat-card>
+                        </mat-radio-button>
+                    </mat-radio-group>
+                    <span class="mb-3" style="opacity: 50%;"><b>Detalle</b></span>
+                    <div class="border rounded w-75 d-flex justify-content-center">
+                        <mat-icon class="me-2 mt-2" style="color: green;">shop</mat-icon>
+                        <h3 class="mt-2" style="opacity: 50%;"><b>Inscripción: $ {{curso.precio_inscripcion}},00</b></h3>
+                    </div>
+                </div>
+                <div class="float-end mt-2">
+                    <button mat-raised-button color="primary" matStepperNext>Siguiente</button>
+                </div>
+                
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="alumnoForm">
+            <form [formGroup]="alumnoForm">
+
+                <ng-template matStepLabel>Datos Personales</ng-template>
+                <div class="d-flex align-items-center flex-column"><h3>{{curso.nombre}}</h3></div>
+                <div class="row g-3">
+                    <mat-form-field class="col-md-6">
+                        <mat-label>Nombres</mat-label>
+                        <input matInput formControlName="nombres" required>
+                        <mat-error *ngIf="alumnoForm.controls.nombres.invalid">
+                            <span>Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6">
+                        <mat-label>Apellidos</mat-label>
+                        <input matInput formControlName="apellidos" required>
+                        <mat-error *ngIf="alumnoForm.controls.apellidos.invalid">
+                            <span>Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6">
+                        <mat-label>DNI</mat-label>
+                        <input matInput formControlName="dni" minlength="8" required>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6">
+                        <mat-label>Fecha de Nacimiento</mat-label>
+                        <input matInput formControlName="fecha_nacimiento" [matDatepicker]="picker" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="alumnoForm.controls.fecha_nacimiento.invalid">
+                            <span>Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6">
+                        <mat-label>Celular</mat-label>
+                        <input matInput formControlName="celular" required>
+                        <mat-error *ngIf="alumnoForm.controls.celular.invalid">
+                            <span>Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="mail" required>
+                    </mat-form-field>
+                </div>
+                <h4 class="mt-3"><b>Domicilio</b></h4>
+                <div class="row g-3">
+                    <mat-form-field class="col-md-6" appearance="outline">
+                        <mat-label>Localidad</mat-label>
+                        <mat-select formControlName="direccion_localidad" aria-required="true">
+                            <mat-option *ngFor="let loc of localidades" [value]="loc.id">{{loc.nombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6" appearance="outline">
+                        <mat-label>Barrio</mat-label>
+                        <input matInput formControlName="direccion_barrio" required>
+                        <mat-error *ngIf="alumnoForm.controls.direccion_barrio.invalid">
+                            <span>Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6" appearance="outline">
+                        <mat-label>Calle</mat-label>
+                        <input matInput formControlName="direccion_calle" required>
+                        <mat-error *ngIf="alumnoForm.controls.direccion_calle.invalid">
+                            <span>Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-md-6" appearance="outline">
+                        <mat-label>Nro</mat-label>
+                        <input matInput formControlName="direccion_numero" required>
+                        <mat-error *ngIf="alumnoForm.controls.direccion_numero.invalid">
+                            <span>Este campo es obligatorio</span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button mat-raised-button matStepperPrevious>Volver</button>
+                    <button mat-raised-button color="primary" matStepperNext>Confirmar</button>
+                </div>
+
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Pago</ng-template>
+            <div class="d-flex align-items-center flex-column">
+                <span class="mb-4" style="opacity: 50%;"><b>Detalle</b></span>
+                <mat-card style="width: 100%;">
+                    <mat-card-header>
+                        <mat-card-title>{{curso.nombre}}</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                        {{comForm.value}}
+                    </mat-card-content>
+                </mat-card>
+                <div class="border rounded w-75 d-flex justify-content-center mt-4">
+                    <mat-icon class="me-2 mt-2" style="color: green;">shop</mat-icon>
+                    <h3 class="mt-2" style="opacity: 50%;"><b>Inscripción: $ {{curso.precio_inscripcion}},00</b></h3>
+                </div>
+                <p class="my-4 w-50">Una vez que completes el pago ya estarás inscripto en el curso.</p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button mat-raised-button color="primary" (click)="save()">Inscribirme</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</mat-dialog-content>

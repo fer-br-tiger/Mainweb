@@ -1,0 +1,10 @@
+@use '~@angular/material' as mat;
+
+.elevacion {
+    transition: all .25s;
+}
+
+.elevacion:hover {
+    @include mat.elevation(8);
+    transform: translateY(-0.5rem);
+}
