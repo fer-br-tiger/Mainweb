@@ -3,7 +3,7 @@
         <mat-toolbar class="bg-success text-white d-flex justify-content-center">
             <span>Detalles del curso</span>
         </mat-toolbar>
-        <a mat-raised-button class="position-absolute bottom-0 end-0" style="background-color: orange;" href="http://localhost:4200">Soy instructor</a>
+        <a mat-raised-button class="position-absolute bottom-0 end-0" style="background-color: orange;" href="http://localhost:4000">Soy instructor</a>
     </div>
     
     <p class="mx-auto" style="max-width: 50rem;">
@@ -38,6 +38,20 @@
                 </ul>
             </span>
             <button mat-raised-button class="me-auto rounded-pill text-white" style="background-color: yellowgreen;" (click)="openDialog()">Inscribirme</button>
+        </div>
+    </div>
+</div>
+
+<div class="position-fixed top-0 start-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <mat-icon style="color: green;">done</mat-icon>
+            <strong class="me-auto">Mensaje</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            La inscripción se realizó con éxito!
         </div>
     </div>
 </div>

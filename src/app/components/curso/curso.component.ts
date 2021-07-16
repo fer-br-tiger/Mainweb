@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import * as bootstrap from 'bootstrap';
 import { CursosService } from 'src/app/services/cursos.service';
 import { IdcursoService } from 'src/app/services/idcurso.service';
 import { InscriptionComponent } from '../inscription/inscription.component';
@@ -11,6 +12,7 @@ import { InscriptionComponent } from '../inscription/inscription.component';
 })
 export class CursoComponent implements OnInit {
   curso!: any;
+  myToast!: bootstrap.Toast;
 
   constructor(public dialog: MatDialog, public idcursoService: IdcursoService, private cursosService: CursosService) {
     try {
@@ -23,6 +25,8 @@ export class CursoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    var myToastEl = document.getElementById('liveToast')!;
+    this.myToast = new bootstrap.Toast(myToastEl);
   }
 
   openDialog() {
@@ -34,6 +38,12 @@ export class CursoComponent implements OnInit {
     }
 
     const dialogRef = this.dialog.open(InscriptionComponent, { data: cursoInf, width: '40%' });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.myToast.show();
+      }
+    });
   }
 
 }
